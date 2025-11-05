@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
-app.use(cors({ origin: ["https://connectup-freelancer-platform-2.onrender.com"], credentials: true }));
+app.use(cors({ origin: ["https://connectup-freelancer-platform-2.onrender.com","https://connectup-freelancer-platform-4.onrender.com"], credentials: true }));
 
 app.use("/api/user", userRouter);
 app.use("/api/gig", gigRouter);
