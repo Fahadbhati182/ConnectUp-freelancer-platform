@@ -10,7 +10,7 @@ import orderRouter from "./src/routes/order.route.js";
 import reviewRouter from "./src/routes/review.routes.js";
 import { Server } from "socket.io";
 import messageRouter from "./src/routes/message.routes.js";
-import path from "path";
+
 
 
 
@@ -18,8 +18,6 @@ await connectDB();
 
 const app = express();
 const server = http.createServer(app);
-
-const __dirname =path.resolve()
 
 
 
@@ -42,7 +40,7 @@ io.on("connection", (socket) => {
   });
 });
 
-app.set("trust proxy", 1); //?That lets Express recognize req.secure even behind proxies — critical for setting cookies properly
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -58,10 +56,9 @@ app.use("/api/message", messageRouter);
 
 app.use(express.static(path.join(__dirname,"/client/dist")))
 
-app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+app.use((req, res, next) => {
+  res.status(404).json({ message: "Server is down" });
 });
-
 app.use((req, res, next) => {
   res.status(404).json({ message: "Not Found" });
 });
