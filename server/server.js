@@ -54,11 +54,11 @@ app.use("/api/review", reviewRouter);
 app.use("/api/message", messageRouter);
 
 
-app.use(express.static(path.join(__dirname,"/client/dist")))
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "Server is down" });
 });
+
 app.use((req, res, next) => {
   res.status(404).json({ message: "Not Found" });
 });
